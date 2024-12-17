@@ -162,7 +162,7 @@ export default function ConnectionForm({ onSubmit }) {
                     <SelectValue placeholder="Select database type" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="mongodb">MongoDB</SelectItem>
+                    {/* <SelectItem value="mongodb">MongoDB</SelectItem> */}
                     <SelectItem value="postgresql">PostgreSQL</SelectItem>
                     <SelectItem value="mysql">MySQL</SelectItem>
                   </SelectContent>
