@@ -22,19 +22,30 @@ export default function ConnectionForm({ onSubmit }) {
   })
   const [showPassword, setShowPassword] = useState(false)
   const [image, setImage] = useState(null)
+  const [loading, setLoading] = useState(false)
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = (e) => {
+    // alert('this run')
+    setLoading(true)  
     e.preventDefault()
-    const { username, password, host, port, databaseName, databaseType } = formData
-    const connectionString = `${databaseType}://${username}:${password}@${host}:${port}/${databaseName}`
-    // onSubmit(connectionString)
-    localStorage.setItem('connectionUrl', url);
-    router.push('/chatbot')
-    alert('we are there')
+    
+    try {
+      const { username, password, host, port, databaseName, databaseType } = formData
+      const connectionString = `${databaseType}://${username}:${password}@${host}:${port}/${databaseName}`
+      // onSubmit(connectionString)
+      localStorage.setItem('connectionUrl', connectionString);
+      router.push('/chatbot')// Redirect on successful submission
+    } catch (error) {
+      console.error("Error submitting form:", error)
+    } finally {
+      setLoading(false)  // Reset loading state after form submission
+    }
+    // alert('we are there')
     
   }
 
